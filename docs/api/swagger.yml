@@ -1,0 +1,68 @@
+swagger: '2.0'
+info:
+  title: Simple OMDB FInder API
+  version: "1.0"
+host: localhost:8001
+schemes:
+  - http
+basePath: /api
+produces:
+  - application/json
+paths:
+  /movies/find:
+    get:
+      summary: Finds movies
+      description: |
+       Finds movies using the OMDB API (https://www.omdbapi.com/)
+      parameters:
+        - name: title
+          in: query
+          description: Title of the movie to find.
+          required: true
+          type: string
+      tags:
+        - Movie
+      responses:
+        200:
+          description: An array of movies
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Movie'
+        404:
+          description: Movie not found
+          schema:
+            $ref: '#/definitions/NotFound'
+        500:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Movie:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Movie title
+      year:
+        type: string
+        description: Year the movie was released in.
+      type:
+        type: string
+        description: Type of the movie.
+      isPosterAvailable:
+        type: boolean
+        description: Whether a poster URL is available for the movie.
+      posterUrl:
+        type: string
+        description: Poster URL of the movie, 'N/A' if unavailable.
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+  NotFound:
+    type: object
+    properties:
+      notFound:
+        type: string

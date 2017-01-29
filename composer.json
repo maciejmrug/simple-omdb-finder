@@ -1,0 +1,27 @@
+{
+  "name": "Simple OMDB Finder",
+  "description": "A simple web app for querying Open Movie Database.",
+  "keywords": ["simple", "omdb", "movie", "finder"],
+  "license": "MIT",
+  "type": "project",
+  "require": {
+    "php": ">=7.0.0",
+    "silex/silex": "~2.0",
+    "guzzlehttp/guzzle": "~6.0",
+    "beberlei/assert": "^2.7",
+    "twig/twig": "^2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0"
+  },
+  "scripts": {
+    "start": "php -S 0.0.0.0:8001 -t public/",
+    "test": "phpunit"
+  },
+  "autoload": {
+    "psr-4": {
+      "OMDBFinder\\": "src/app",
+      "OMDBFinder\\Tests\\": "tests/app"
+    }
+  }
+}
